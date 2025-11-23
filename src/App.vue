@@ -50,6 +50,7 @@ const selectedKeys = ref<string[]>(['1'])
 const collapsed = ref<boolean>(false)
 const siderWidth = ref<number>(250)
 </script>
+
 <style>
 .trigger {
   font-size: 18px;
