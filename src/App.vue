@@ -2,7 +2,13 @@
   <a-layout class="main-layout">
     <!-- 사이드바 -->
     <!-- 주의: sider의 width는 내부적으로 인라인 스타일로 지정되므로, style 속성으로 조정할 수 없음 -->
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible :width="siderWidth">
+    <a-layout-sider
+      v-model:collapsed="collapsed"
+      :trigger="null"
+      collapsible
+      :width="siderWidth"
+      :collapsed-width="0"
+    >
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item v-for="item in menuItems" :key="item.key">
