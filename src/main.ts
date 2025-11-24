@@ -10,6 +10,7 @@ import App from './App.vue'
 import router from './router'
 
 if (import.meta.env.DEV) {
+  // 반드시 worker.start()가 app.mount('#app') 전에 호출되어야 함
   await worker.start()
 }
 

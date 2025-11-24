@@ -5,17 +5,8 @@
     <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible :width="siderWidth">
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <a-menu-item key="1">
-          <user-outlined />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <video-camera-outlined />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <upload-outlined />
-          <span>nav 3</span>
+        <a-menu-item v-for="item in menuItems" :key="item.key">
+          <span>{{ item.label }}</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -39,13 +30,19 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons-vue'
+
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
+
+interface MenuItem {
+  key: string
+  label: string
+}
+
+const menuItems = ref<MenuItem[]>([
+  { key: '1', label: 'nav 1' },
+  { key: '2', label: 'nav 2' },
+  { key: '3', label: 'nav 3' },
+])
 const selectedKeys = ref<string[]>(['1'])
 const collapsed = ref<boolean>(false)
 const siderWidth = ref<number>(250)
