@@ -46,6 +46,7 @@
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "jsdom": "^27.0.1",
+    "msw": "^2.12.3",
     "npm-run-all2": "^8.0.4",
     "oxlint": "~1.23.0",
     "prettier": "3.6.2",
@@ -55,5 +56,10 @@
     "vite-plugin-vue-devtools": "^8.0.3",
     "vitest": "^3.2.4",
     "vue-tsc": "^3.1.1"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
