@@ -11,9 +11,14 @@
     >
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <a-menu-item v-for="item in menuItems" :key="item.key">
-          <span>{{ item.label }}</span>
-        </a-menu-item>
+        <a-sub-menu v-for="item in menuItems" :key="item.key">
+          <template #title>
+            <span>{{ item.label }}</span>
+          </template>
+          <a-menu-item v-for="subItem in item.children" :key="subItem.key">
+            <span>{{ subItem.label }}</span>
+          </a-menu-item>
+        </a-sub-menu>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -35,23 +40,35 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import ky from 'ky'
 
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 
-interface MenuItem {
+interface SubMenuItem {
   key: string
   label: string
 }
 
-const menuItems = ref<MenuItem[]>([
-  { key: '1', label: 'nav 1' },
-  { key: '2', label: 'nav 2' },
-  { key: '3', label: 'nav 3' },
-])
-const selectedKeys = ref<string[]>(['1'])
+interface MenuItem {
+  key: string
+  label: string
+  children: SubMenuItem[]
+}
+
+const menuItems = ref<MenuItem[]>([])
+const selectedKeys = ref<string[]>([])
 const collapsed = ref<boolean>(false)
 const siderWidth = ref<number>(250)
+
+onMounted(async () => {
+  try {
+    const data = await ky.get('/api/v1/menus').json<MenuItem[]>()
+    menuItems.value = data
+  } catch (error) {
+    console.error('Failed to fetch menus:', error)
+  }
+})
 </script>
 
 <style>
