@@ -3,7 +3,7 @@
 Vue 3와 Ant Design Vue 4로 만든 기본 대시보드 화면입니다.
 
 ## 개발환경
-1. Node.js 24 이상 [NodeJS](https://nodejs.org/)
+1. Node.js 최소 20.19.0 (22.12.0 이상 권장) [NodeJS](https://nodejs.org/)
 2. VSCode
 
 ## VSCode 플러그인
