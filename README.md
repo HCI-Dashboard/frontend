@@ -1,53 +1,48 @@
 # frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue 3와 Ant Design Vue 4로 만든 기본 대시보드 화면입니다.
 
-## Recommended IDE Setup
+## 개발환경
+1. Node.js 24 이상 [NodeJS](https://nodejs.org/)
+2. VSCode
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## VSCode 플러그인
+1. EditorConfig for VS Code - https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+2. Vue (Official) - https://marketplace.visualstudio.com/items?itemName=Vue.volar
+3. Prettier - Code formatter - https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+4. ESLint - https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+5. Oxc - https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode
+6. Vitest - https://marketplace.visualstudio.com/items?itemName=vitest.explorer
 
-## Recommended Browser Setup
+* 위의 플러그인은 VSCode로 해당 프로젝트를 로드 시, 자동으로 추천되게 세팅되어 있습니다.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## 프로젝트 설정
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+### 프로젝트 의존성 라이브러리 설치
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 프로젝트 개발환경 실행
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 프로젝트 빌드
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Vitest를 이용한 단위 테스트 실행 [Vitest](https://vitest.dev/)
 
 ```sh
 npm run test:unit
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+### Cypress를 이용한 End-to-end 테스트 실행 [Cypress](https://www.cypress.io/)
 
 ```sh
 npm run test:e2e:dev
@@ -63,8 +58,14 @@ npm run build
 npm run test:e2e
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### ESLint를 이용한 정적코드 분석 [ESLint](https://eslint.org/)
 
 ```sh
 npm run lint
+```
+
+### Prettier를 이용한 코드 포맷 통일 [Prettier](https://prettier.io/)
+
+```sh
+npm run format
 ```
