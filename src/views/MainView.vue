@@ -5,12 +5,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
-const title = computed(() => route.meta.title || 'Main View')
-const contents = ref('Hello, this is the main view content.')
+const route = useRoute();
+const title = computed(() => route.meta.title || "Main View");
+const contents = ref("Hello, this is the main view content.");
 </script>
 
 <style scoped>
