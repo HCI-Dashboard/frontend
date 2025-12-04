@@ -4,27 +4,27 @@ export const handlers = [
   http.get("/api/v1/menus", () => {
     return HttpResponse.json([
       {
-        key: "1",
-        label: "nav 1",
+        menuCd: "1",
+        menuNm: "nav 1",
         children: [
-          { key: "11", label: "sub-nav 1", uri: "/subnav1" },
-          { key: "12", label: "sub-nav 2", uri: "/subnav2" },
+          { menuCd: "11", menuNm: "sub-nav 1", uri: "/subnav1", layout: "MainLayout" },
+          { menuCd: "12", menuNm: "sub-nav 2", uri: "/subnav2", layout: "MainLayout" },
         ],
       },
       {
-        key: "2",
-        label: "nav 2",
+        menuCd: "2",
+        menuNm: "nav 2",
         children: [
-          { key: "21", label: "sub-nav 3", uri: "/subnav3" },
-          { key: "22", label: "sub-nav 4", uri: "/subnav4" },
+          { menuCd: "21", menuNm: "sub-nav 3", uri: "/subnav3", layout: "MainLayout" },
+          { menuCd: "22", menuNm: "sub-nav 4", uri: "/subnav4", layout: "MainLayout" },
         ],
       },
       {
-        key: "3",
-        label: "nav 3",
+        menuCd: "3",
+        menuNm: "nav 3",
         children: [
-          { key: "31", label: "sub-nav 5", uri: "/subnav5" },
-          { key: "32", label: "sub-nav 6", uri: "/subnav6" },
+          { menuCd: "31", menuNm: "sub-nav 5", uri: "/subnav5", layout: "MainLayout" },
+          { menuCd: "32", menuNm: "sub-nav 6", uri: "/subnav6", layout: "MainLayout" },
         ],
       },
     ]);
