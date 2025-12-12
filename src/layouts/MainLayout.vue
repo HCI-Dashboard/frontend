@@ -5,13 +5,13 @@
     <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible :width="siderWidth" :collapsed-width="0">
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <a-sub-menu v-for="item in menuItems" :key="item.key">
+        <a-sub-menu v-for="item in menuItems" :key="item.menuCd">
           <template #title>
-            <span>{{ item.label }}</span>
+            <span>{{ item.menuNm }}</span>
           </template>
-          <a-menu-item v-for="subItem in item.children" :key="subItem.key">
+          <a-menu-item v-for="subItem in item.children" :key="subItem.menuCd">
             <router-link :to="subItem.uri">
-              {{ subItem.label }}
+              {{ subItem.menuNm }}
             </router-link>
           </a-menu-item>
         </a-sub-menu>
@@ -40,14 +40,14 @@ import ky from "ky";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
 
 interface SubMenuItem {
-  key: string;
-  label: string;
+  menuCd: string;
+  menuNm: string;
   uri: string;
 }
 
 interface MenuItem {
-  key: string;
-  label: string;
+  menuCd: string;
+  menuNm: string;
   children: SubMenuItem[];
 }
 
