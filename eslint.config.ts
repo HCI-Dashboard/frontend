@@ -1,12 +1,10 @@
-import { globalIgnores } from "eslint/config";
-import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
-import pluginVue from "eslint-plugin-vue";
-import pluginVitest from "@vitest/eslint-plugin";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import pluginCypress from "eslint-plugin-cypress";
-import pluginOxlint from "eslint-plugin-oxlint";
-import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
+import { globalIgnores } from 'eslint/config'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import pluginVue from 'eslint-plugin-vue'
+import pluginPlaywright from 'eslint-plugin-playwright'
+import pluginVitest from '@vitest/eslint-plugin'
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import pluginOxlint from 'eslint-plugin-oxlint'
 
 // To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
 // import { configureVueProject } from '@vue/eslint-config-typescript'
@@ -15,30 +13,32 @@ import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 
 export default defineConfigWithVueTs(
   {
-    name: "app/files-to-lint",
-    files: ["**/*.{ts,mts,tsx,vue}"],
+    name: 'app/files-to-lint',
+    files: ['**/*.{vue,ts,mts,tsx}'],
   },
 
-  globalIgnores(["**/dist/**", "**/dist-ssr/**", "**/coverage/**"]),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
 
-  pluginVue.configs["flat/essential"],
+  ...pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
 
   {
-    ...pluginVitest.configs.recommended,
-    files: ["src/**/__tests__/*"],
+    ...pluginPlaywright.configs['flat/recommended'],
+    files: ['e2e/**/*.{test,spec}.{js,ts,jsx,tsx}'],
   },
 
   {
-    ...pluginCypress.configs.recommended,
-    files: ["cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}", "cypress/support/**/*.{js,ts,jsx,tsx}"],
+    ...pluginVitest.configs.recommended,
+    files: ['src/**/__tests__/*'],
   },
-  ...pluginOxlint.configs["flat/recommended"],
+
+  skipFormatting,
+
+  ...pluginOxlint.configs['flat/recommended'],
   {
     // 경고 수준으로 any 사용을 허용하되 lint 경고가 발생하도록 설정
     rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
-  skipFormatting,
-);
+)

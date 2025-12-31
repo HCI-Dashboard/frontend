@@ -3,10 +3,12 @@
 Vue 3와 Ant Design Vue 4로 만든 기본 대시보드 화면입니다.
 
 ## 개발환경
+
 1. Node.js 최소 20.19.0 (22.12.0 이상 권장) [NodeJS](https://nodejs.org/)
 2. VSCode
 
 ## VSCode 플러그인
+
 1. EditorConfig for VS Code - https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 2. Vue (Official) - https://marketplace.visualstudio.com/items?itemName=Vue.volar
 3. Prettier - Code formatter - https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
@@ -14,7 +16,7 @@ Vue 3와 Ant Design Vue 4로 만든 기본 대시보드 화면입니다.
 5. Oxc - https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode
 6. Vitest - https://marketplace.visualstudio.com/items?itemName=vitest.explorer
 
-* 위의 플러그인은 VSCode로 해당 프로젝트를 로드 시, 자동으로 추천되게 세팅되어 있습니다.
+- 위의 플러그인은 VSCode로 해당 프로젝트를 로드 시, 자동으로 추천되게 세팅되어 있습니다.
 
 ## 프로젝트 설정
 
@@ -42,20 +44,23 @@ npm run build
 npm run test:unit
 ```
 
-### Cypress를 이용한 End-to-end 테스트 실행 [Cypress](https://www.cypress.io/)
+### Playwright를 이용한 End-to-End 테스트 [Playwright](https://playwright.dev)
 
 ```sh
-npm run test:e2e:dev
-```
+# Install browsers for the first run
+npx playwright install
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
+# When testing on CI, must build the project first
 npm run build
+
+# Runs the end-to-end tests
 npm run test:e2e
+# Runs the tests only on Chromium
+npm run test:e2e -- --project=chromium
+# Runs the tests of a specific file
+npm run test:e2e -- tests/example.spec.ts
+# Runs the tests in debug mode
+npm run test:e2e -- --debug
 ```
 
 ### ESLint를 이용한 정적코드 분석 [ESLint](https://eslint.org/)
