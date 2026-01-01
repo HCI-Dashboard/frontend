@@ -1,8 +1,6 @@
-import "ant-design-vue/dist/reset.css";
-
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import Antd from "ant-design-vue";
+import naive from 'naive-ui'
 
 import worker from "./mocks/browser";
 
@@ -22,6 +20,6 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
-app.use(Antd);
+app.use(naive);
 
 app.mount("#app");

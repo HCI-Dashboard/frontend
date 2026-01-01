@@ -21,7 +21,6 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
-    "ant-design-vue": "^4.2.6",
     "ky": "^1.14.2",
     "pinia": "^3.0.4",
     "vue": "^3.5.26",
@@ -32,6 +31,7 @@
     "@tsconfig/node24": "^24.0.3",
     "@types/jsdom": "^27.0.0",
     "@types/node": "^24.10.4",
+    "@vicons/carbon": "^0.13.0",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vitest/eslint-plugin": "^1.6.4",
     "@vue/eslint-config-prettier": "^10.2.0",
@@ -45,10 +45,12 @@
     "jiti": "^2.6.1",
     "jsdom": "^27.3.0",
     "msw": "^2.12.7",
+    "naive-ui": "^2.43.2",
     "npm-run-all2": "^8.0.4",
     "oxlint": "~1.35.0",
     "prettier": "3.7.4",
     "typescript": "~5.9.3",
+    "vfonts": "^0.0.3",
     "vite": "npm:rolldown-vite@latest",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vitest": "^4.0.16",

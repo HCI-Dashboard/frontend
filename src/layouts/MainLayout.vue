@@ -1,65 +1,90 @@
 <template>
-  <a-layout class="main-layout">
-    <!-- 사이드바 -->
-    <!-- 주의: sider의 width는 내부적으로 인라인 스타일로 지정되므로, style 속성으로 조정할 수 없음 -->
-    <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible :width="siderWidth" :collapsed-width="0">
-      <div class="logo" />
-      <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <a-sub-menu v-for="item in menuItems" :key="item.menuCd">
-          <template #title>
-            <span>{{ item.menuNm }}</span>
-          </template>
-          <a-menu-item v-for="subItem in item.children" :key="subItem.menuCd">
-            <router-link :to="subItem.uri">
-              {{ subItem.menuNm }}
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-      </a-menu>
-    </a-layout-sider>
-    <a-layout>
-      <!-- 헤더 -->
-      <a-layout-header style="background: #ccc; padding: 0">
-        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
-        <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
-      </a-layout-header>
-
-      <!-- 콘텐츠 -->
-      <a-layout-content :style="{ padding: '24px', background: '#fff', minHeight: '280px' }">
+  <n-layout has-sider>
+    <n-layout-sider
+      bordered
+      show-trigger
+      collapse-mode="width"
+      :collapsed-width="64"
+      :width="240"
+      :collapsed="collapsed"
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
+    >
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+      />
+    </n-layout-sider>
+    <n-layout>
+      <n-layout-header>This is header</n-layout-header>
+      <n-layout-content content-style="padding: 24px;">
         <router-view />
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+      </n-layout-content>
+      <n-layout-footer>This is footer</n-layout-footer>
+    </n-layout>
+  </n-layout>
 </template>
 
 <script lang="ts" setup>
+import type { MenuOption } from 'naive-ui'
 import { RouterView, RouterLink } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, h } from "vue";
 import ky from "ky";
 
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
-
-interface SubMenuItem {
-  menuCd: string;
-  menuNm: string;
-  uri: string;
-}
-
-interface MenuItem {
-  menuCd: string;
-  menuNm: string;
-  children: SubMenuItem[];
-}
-
 const menuItems = ref<MenuItem[]>([]);
-const selectedKeys = ref<string[]>([]);
 const collapsed = ref<boolean>(false);
-const siderWidth = ref<number>(250);
+const menuOptions = ref<MenuOption[]>([]);
 
 onMounted(async () => {
   try {
     const data = await ky.get("/api/v1/menus").json<MenuItem[]>();
     menuItems.value = data;
+    menuOptions.value = [
+      {
+        label: 'Main Menu 1',
+        key: 'main1',
+        children: [
+          {
+            label: () => h(RouterLink, { to: { name: 'sub-nav 1', params: { lang: 'ko-KR' } } }, {  default: () => 'Sub Menu 1' }),
+            key: 'sub1-1'
+          },
+          {
+            label: () => h(RouterLink, { to: { name: 'sub-nav 2', params: { lang: 'ko-KR' } } }, {  default: () => 'Sub Menu 2' }),
+            key: 'sub1-2'
+          }
+        ]
+      },
+      {
+        label: 'Main Menu 2',
+        key: 'main2',
+        children: [
+          {
+            label: () => h(RouterLink, { to: { name: 'sub-nav 3', params: { lang: 'ko-KR' } } }, {  default: () => 'Sub Menu 3' }),
+            key: 'sub2-1'
+          },
+          {
+            label: () => h(RouterLink, { to: { name: 'sub-nav 4', params: { lang: 'ko-KR' } } }, {  default: () => 'Sub Menu 4' }),
+            key: 'sub2-2'
+          }
+        ]
+      },
+      {
+        label: 'Main Menu 3',
+        key: 'main3',
+        children: [
+          {
+            label: () => h(RouterLink, { to: { name: 'sub-nav 5', params: { lang: 'ko-KR' } } }, {  default: () => 'Sub Menu 5' }),
+            key: 'sub3-1'
+          },
+          {
+            label: () => h(RouterLink, { to: { name: 'sub-nav 6', params: { lang: 'ko-KR' } } }, {  default: () => 'Sub Menu 6' }),
+            key: 'sub3-2'
+          }
+        ]
+      }
+    ]
   } catch (error) {
     console.error("Failed to fetch menus:", error);
   }
