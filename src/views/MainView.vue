@@ -2,7 +2,7 @@
   <div class="main-view">
     <h1>{{ title }}</h1>
     <p>{{ contents }}</p>
-    <DoughnutChartComponent />
+    <DoughnutChartComponent title="클러스터 상태" :data="[300, 50, 100]" />
   </div>
 </template>
 <script lang="ts" setup>

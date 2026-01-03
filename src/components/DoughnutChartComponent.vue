@@ -1,31 +1,74 @@
 <template>
-  <canvas ref="chartCanvas"></canvas>
+  <n-card>
+    <div style="text-align: center; max-width: 320px; margin: auto;">
+      <canvas ref="chartCanvas"></canvas>
+    </div>
+  </n-card>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Chart, registerables } from "chart.js";
+
+// Props 정의
+interface Props {
+  title: string;
+  data: number[];
+  labels?: string[];
+  backgroundColor?: string[];
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  labels: () => ["정상", "경고", "이상"],
+  backgroundColor: () => ["rgb(25, 135, 84)", "rgb(255, 193, 7)", "rgb(220, 53, 69)"],
+});
+
+const chartCanvas = ref<HTMLCanvasElement | null>(null);
+let chartInstance: Chart | null = null;
 
 Chart.register(...registerables);
 
-const chartCanvas = ref<HTMLCanvasElement | null>(null);
-
-onMounted(() => {
+const createChart = () => {
   if (!chartCanvas.value) return;
 
-  new Chart(chartCanvas.value, {
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+
+  chartInstance = new Chart(chartCanvas.value, {
     type: "doughnut",
     data: {
-      labels: ["Red", "Blue", "Yellow"],
+      labels: props.labels,
       datasets: [
         {
-          label: "My First Dataset",
-          data: [300, 50, 100],
-          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+          label: props.title,
+          data: props.data,
+          backgroundColor: props.backgroundColor,
           hoverOffset: 4,
         },
       ],
     },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+        title: {
+          display: true,
+          text: props.title,
+        },
+      },
+    }
   });
+};
+
+onMounted(() => {
+  createChart();
 });
+
+// Props 변경 감지
+watch(() => [props.data, props.labels, props.backgroundColor, props.title], () => {
+  createChart();
+}, { deep: true });
 </script>

@@ -73,12 +73,12 @@ onMounted(async () => {
         children: [
           {
             label: () =>
-              h(RouterLink, { to: { name: "sub-nav 1", query: { lang: "ko-KR" } } }, { default: () => "Sub Menu 1" }),
+              h(RouterLink, { to: { name: "sub-nav 1", query: { lang: "ko-KR" } } }, () => "Sub Menu 1"),
             key: "sub1-1",
           },
           {
             label: () =>
-              h(RouterLink, { to: { name: "sub-nav 2", query: { lang: "ko-KR" } } }, { default: () => "Sub Menu 2" }),
+              h(RouterLink, { to: { name: "sub-nav 2", query: { lang: "ko-KR" } } }, () => "Sub Menu 2"),
             key: "sub1-2",
           },
         ],
@@ -89,12 +89,12 @@ onMounted(async () => {
         children: [
           {
             label: () =>
-              h(RouterLink, { to: { name: "sub-nav 3", query: { lang: "ko-KR" } } }, { default: () => "Sub Menu 3" }),
+              h(RouterLink, { to: { name: "sub-nav 3", query: { lang: "ko-KR" } } }, () => "Sub Menu 3"),
             key: "sub2-1",
           },
           {
             label: () =>
-              h(RouterLink, { to: { name: "sub-nav 4", query: { lang: "ko-KR" } } }, { default: () => "Sub Menu 4" }),
+              h(RouterLink, { to: { name: "sub-nav 4", query: { lang: "ko-KR" } } }, () => "Sub Menu 4"),
             key: "sub2-2",
           },
         ],
@@ -105,12 +105,12 @@ onMounted(async () => {
         children: [
           {
             label: () =>
-              h(RouterLink, { to: { name: "sub-nav 5", query: { lang: "ko-KR" } } }, { default: () => "Sub Menu 5" }),
+              h(RouterLink, { to: { name: "sub-nav 5", query: { lang: "ko-KR" } } }, () => "Sub Menu 5"),
             key: "sub3-1",
           },
           {
             label: () =>
-              h(RouterLink, { to: { name: "sub-nav 6", query: { lang: "ko-KR" } } }, { default: () => "Sub Menu 6" }),
+              h(RouterLink, { to: { name: "sub-nav 6", query: { lang: "ko-KR" } } }, () => "Sub Menu 6"),
             key: "sub3-2",
           },
         ],
