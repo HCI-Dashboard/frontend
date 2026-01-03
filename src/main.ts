@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import naive from 'naive-ui'
+import naive from "naive-ui";
 
 import worker from "./mocks/browser";
 
