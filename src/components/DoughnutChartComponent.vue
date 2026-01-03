@@ -3,29 +3,29 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { Chart, registerables } from 'chart.js'
+import { onMounted, ref } from "vue";
+import { Chart, registerables } from "chart.js";
 
-Chart.register(...registerables)
+Chart.register(...registerables);
 
-const chartCanvas = ref<HTMLCanvasElement | null>(null)
+const chartCanvas = ref<HTMLCanvasElement | null>(null);
 
 onMounted(() => {
-  if (!chartCanvas.value) return
+  if (!chartCanvas.value) return;
 
   new Chart(chartCanvas.value, {
-    type: 'doughnut',
+    type: "doughnut",
     data: {
-      labels: ['Red', 'Blue', 'Yellow'],
+      labels: ["Red", "Blue", "Yellow"],
       datasets: [
         {
-          label: 'My First Dataset',
+          label: "My First Dataset",
           data: [300, 50, 100],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
           hoverOffset: 4,
         },
       ],
     },
-  })
-})
+  });
+});
 </script>
