@@ -2,7 +2,14 @@
   <div class="main-view">
     <h1>{{ title }}</h1>
     <p>{{ contents }}</p>
-    <DoughnutChartComponent title="클러스터 상태" :data="[300, 50, 100]" />
+    <n-row gutter="12">
+      <n-col :span="12">
+        <DoughnutChartComponent title="클러스터 상태" :data="[300, 50, 100]" />
+      </n-col>
+      <n-col :span="12">
+        <DoughnutChartComponent title="가상머신 상태" :data="[300, 50, 100]" />
+      </n-col>
+    </n-row>
   </div>
 </template>
 <script lang="ts" setup>
