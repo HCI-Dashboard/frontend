@@ -1,6 +1,6 @@
 <template>
   <n-card>
-    <div style="text-align: center; max-width: 320px; margin: auto;">
+    <div style="text-align: center; max-width: 320px; margin: auto">
       <canvas ref="chartCanvas"></canvas>
     </div>
   </n-card>
@@ -59,7 +59,7 @@ const createChart = () => {
           text: props.title,
         },
       },
-    }
+    },
   });
 };
 
@@ -68,7 +68,11 @@ onMounted(() => {
 });
 
 // Props 변경 감지
-watch(() => [props.data, props.labels, props.backgroundColor, props.title], () => {
-  createChart();
-}, { deep: true });
+watch(
+  () => [props.data, props.labels, props.backgroundColor, props.title],
+  () => {
+    createChart();
+  },
+  { deep: true },
+);
 </script>

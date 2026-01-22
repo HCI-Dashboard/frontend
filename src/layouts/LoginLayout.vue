@@ -1,11 +1,6 @@
 <template>
   <n-card title="Login">
-    <n-input
-      v-model:value="username"
-      type="text"
-      placeholder="Username"
-      :maxlength="20"
-    />
+    <n-input v-model:value="username" type="text" placeholder="Username" :maxlength="20" />
 
     <n-input
       v-model:value="password"
@@ -20,11 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import userService from '@/services/user-service';
+import { ref } from "vue";
+import userService from "@/services/user-service";
 
-const username = ref<string>('');
-const password = ref<string>('');
+const username = ref<string>("");
+const password = ref<string>("");
 
 async function loginSubmit() {
   await userService.login(username.value, password.value);

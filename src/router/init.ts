@@ -17,10 +17,9 @@ export default async function initRoutes() {
           router.addRoute({
             path,
             name,
-            component: () => import("@/views/MainView.vue"),
+            component: () => import("@/layouts/MainLayout.vue"),
             meta: { title: name },
           });
-          console.info("Added route", name, path);
         }
       }
     }
