@@ -1,7 +1,6 @@
 <template>
   <n-config-provider>
     <n-layout has-sider style="height: 100vh">
-
       <!-- 사이드 바 -->
       <n-layout-sider
         bordered
@@ -16,7 +15,6 @@
         <n-menu :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22" :options="menuOptions" />
       </n-layout-sider>
       <n-layout style="height: 100vh; display: flex; flex-direction: column">
-
         <!-- 헤더 -->
         <n-layout-header
           bordered

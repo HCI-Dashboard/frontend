@@ -20,7 +20,7 @@ const router = createRouter({
           path: "/subnav1",
           name: "sub-nav 1",
           component: MainView,
-          meta: { title: "sub-nav 1"},
+          meta: { title: "sub-nav 1" },
         },
         {
           path: "/subnav2",
@@ -51,8 +51,8 @@ const router = createRouter({
           name: "sub-nav 6",
           component: MainView,
           meta: { title: "sub-nav 6" },
-        }
-      ]
+        },
+      ],
     },
     {
       path: "/login",
