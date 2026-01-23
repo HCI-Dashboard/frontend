@@ -2,7 +2,7 @@
   <n-flex align="center" justify="center" vertical style="min-height: 100vh">
     <n-grid :cols="12">
       <n-grid-item :offset="4" :span="4">
-        <n-card title="Login">
+        <n-card title="로그인">
           <n-space vertical>
             <!-- username -->
             <n-input v-model:value="username" type="text" placeholder="Username" :maxlength="20" />
