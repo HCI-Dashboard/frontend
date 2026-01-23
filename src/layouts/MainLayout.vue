@@ -77,7 +77,6 @@ onMounted(async () => {
       {
         label: () => h(RouterLink, { to: { path: "/" } }, () => "메인"),
         key: "main",
-        uri: "/",
       },
       {
         label: "클러스터",
@@ -86,19 +85,16 @@ onMounted(async () => {
           {
             label: () => h(RouterLink, { to: { path: "/cluster/internal" } }, () => "내부망"),
             key: "cluster-internal",
-            uri: "/cluster/internal",
           },
           {
             label: () => h(RouterLink, { to: { path: "/cluster/external" } }, () => "외부망"),
             key: "cluster-external",
-            uri: "/cluster/external",
           },
         ],
       },
       {
         label: () => h(RouterLink, { to: { path: "/login" } }, () => "로그인"),
         key: "login",
-        uri: "/login",
       },
     ];
   } catch (error) {

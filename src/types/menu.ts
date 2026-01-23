@@ -3,6 +3,6 @@ export interface Menu {
   parentId: number | null;
   name: string;
   path: string;
-  component: string | null;
+  component: string;
   children?: Menu[];
 }

@@ -1,5 +1,3 @@
 <template>
-  <div>
-    This is cluster page
-  </div>
+  <div>This is cluster page</div>
 </template>

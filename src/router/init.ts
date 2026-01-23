@@ -52,11 +52,7 @@ function buildChildren(menus: Menu[], allMenus: Menu[]): any[] {
   const routes: any[] = [];
 
   for (const menu of menus) {
-    if (!menu.component) {
-      // component가 없으면 그 자식들을 가져옴
-      const grandChildren = allMenus.filter((m) => m.parentId === menu.id);
-      routes.push(...buildChildren(grandChildren, allMenus));
-    } else {
+    if (menu.component) {
       const children = allMenus.filter((m) => m.parentId === menu.id);
       const route: any = {
         path: menu.path,
@@ -70,6 +66,10 @@ function buildChildren(menus: Menu[], allMenus: Menu[]): any[] {
       }
 
       routes.push(route);
+    } else {
+      // component가 없으면 그 자식들을 가져옴
+      const grandChildren = allMenus.filter((m) => m.parentId === menu.id);
+      routes.push(...buildChildren(grandChildren, allMenus));
     }
   }
 
