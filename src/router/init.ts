@@ -26,13 +26,18 @@ function createRoute(menus: Menu[]) {
     if (menu.uri) {
       addRoute(menu);
     } else {
-      createRoute(menu?.children || [])
+      createRoute(menu?.children || []);
     }
   }
 }
 
 function addRoute(menu: Menu) {
-  const path = menu.uri ? menu.uri : (() => { throw new Error("URI가 존재하지 않습니다."); })();
+  // children이 없는 메뉴인 경우, URI가 반드시 존재함
+  const path = menu.uri
+    ? menu.uri
+    : (() => {
+        throw new Error("URI가 존재하지 않습니다.");
+      })();
   const name = menu.menuNm;
   if (!router.hasRoute(name)) {
     router.addRoute({
