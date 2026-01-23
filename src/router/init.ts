@@ -9,6 +9,7 @@ export default async function initRoutes() {
       return;
     }
     const menus: Menu[] = await res.json();
+
     for (const menu of menus) {
       if (menu.uri) {
         const path = menu.uri;

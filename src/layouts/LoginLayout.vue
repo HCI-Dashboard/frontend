@@ -1,21 +1,25 @@
 <template>
-  <n-grid :cols="12">
-    <n-grid-item :offset="4" :span="4">
-      <n-card title="Login">
-        <!-- username -->
-        <n-input v-model:value="username" type="text" placeholder="Username" :maxlength="20" />
-        <!-- password -->
-        <n-input
-          v-model:value="password"
-          type="password"
-          show-password-on="mousedown"
-          placeholder="Password"
-          :maxlength="20"
-        />
-        <n-button v-on:click="loginSubmit" type="primary" block>로그인</n-button>
-      </n-card>
-    </n-grid-item>
-  </n-grid>
+  <n-flex align="center" justify="center" vertical style="min-height: 100vh">
+    <n-grid :cols="12">
+      <n-grid-item :offset="4" :span="4">
+        <n-card title="Login">
+          <n-space vertical>
+            <!-- username -->
+            <n-input v-model:value="username" type="text" placeholder="Username" :maxlength="20" />
+            <!-- password -->
+            <n-input
+              v-model:value="password"
+              type="password"
+              show-password-on="mousedown"
+              placeholder="Password"
+              :maxlength="20"
+            />
+            <n-button v-on:click="loginSubmit" type="primary" block>로그인</n-button>
+          </n-space>
+        </n-card>
+      </n-grid-item>
+    </n-grid>
+  </n-flex>
 </template>
 
 <script lang="ts" setup>
