@@ -1,7 +1,8 @@
 export interface Menu {
-  menuCd: string;
-  menuNm: string;
-  uri?: string;
-  layout?: string;
+  id: number;
+  parentId: number | null;
+  name: string;
+  path: string;
+  component: string | null;
   children?: Menu[];
 }

@@ -75,7 +75,7 @@ onMounted(async () => {
     menuItems.value = data;
     menuOptions.value = [
       {
-        label: () => h(RouterLink, { to: { name: "대시보드" } }, () => "메인"),
+        label: () => h(RouterLink, { to: { path: "/" } }, () => "메인"),
         key: "main",
         uri: "/",
       },
@@ -84,19 +84,19 @@ onMounted(async () => {
         key: "cluster",
         children: [
           {
-            label: () => h(RouterLink, { to: { name: "내부망 클러스터" } }, () => "내부망"),
+            label: () => h(RouterLink, { to: { path: "/cluster/internal" } }, () => "내부망"),
             key: "cluster-internal",
             uri: "/cluster/internal",
           },
           {
-            label: () => h(RouterLink, { to: { name: "외부망 클러스터" } }, () => "외부망"),
+            label: () => h(RouterLink, { to: { path: "/cluster/external" } }, () => "외부망"),
             key: "cluster-external",
             uri: "/cluster/external",
           },
         ],
       },
       {
-        label: () => h(RouterLink, { to: { name: "로그인" } }, () => "로그인"),
+        label: () => h(RouterLink, { to: { path: "/login" } }, () => "로그인"),
         key: "login",
         uri: "/login",
       },

@@ -1,51 +1,77 @@
 import router from "@/router";
 import type { Menu } from "@/types/menu";
 
+const componentMap: Record<string, () => Promise<any>> = {
+  MainLayout: () => import("@/layouts/MainLayout.vue"),
+  LoginLayout: () => import("@/layouts/LoginLayout.vue"),
+  MainPage: () => import("@/pages/MainPage.vue"),
+  LoginPage: () => import("@/pages/LoginPage.vue"),
+  ClusterPage: () => import("@/pages/ClusterPage.vue"),
+};
+
 export default async function initRoutes() {
-  try {
-    const res = await fetch("/api/v1/menus");
-    if (!res.ok) {
-      console.warn("메뉴 목록을 불러오는데 실패 했습니다.");
-      console.debug(res.status);
-      return;
-    }
-    const menus: Menu[] = await res.json();
-    createRoute(menus);
-  } catch (e) {
-    console.error("메뉴 목록 생성도중 오류가 발생했습니다: ", e);
+  const response = await fetch("/api/v1/menus");
+  const menus: Menu[] = await response.json();
+
+  // parentId가 null인 최상위 메뉴들을 찾아 라우트 생성
+  const rootMenus = menus.filter((menu) => menu.parentId === null);
+
+  for (const rootMenu of rootMenus) {
+    buildRoute(rootMenu, menus);
   }
 }
 
-function createRoute(menus: Menu[]) {
-  // menus가 null/undefined 이거나 빈 배열일 경우 리턴
-  if (!menus?.length) {
+function buildRoute(menu: Menu, allMenus: Menu[]) {
+  if (!menu.component) {
+    // component가 없으면 자식들을 재귀적으로 처리
+    const children = allMenus.filter((m) => m.parentId === menu.id);
+    for (const child of children) {
+      buildRoute(child, allMenus);
+    }
     return;
   }
 
-  for (const menu of menus) {
-    if (menu.uri) {
-      addRoute(menu);
-    } else {
-      createRoute(menu?.children || []);
-    }
+  const children = allMenus.filter((m) => m.parentId === menu.id);
+
+  const route: any = {
+    path: menu.path,
+    name: `route-${menu.id}`,
+    component: componentMap[menu.component],
+    meta: { title: menu.name },
+  };
+
+  // 자식 메뉴를 재귀적으로 처리
+  if (children.length > 0) {
+    route.children = buildChildren(children, allMenus);
   }
+
+  router.addRoute(route);
 }
 
-function addRoute(menu: Menu) {
-  // children이 없는 메뉴인 경우, URI가 반드시 존재함
-  const path = menu.uri
-    ? menu.uri
-    : (() => {
-        throw new Error("URI가 존재하지 않습니다.");
-      })();
-  const name = menu.menuNm;
-  if (!router.hasRoute(name)) {
-    router.addRoute({
-      path,
-      name,
-      component: () =>
-        menu.uri === "/login" ? import("@/layouts/LoginLayout.vue") : import("@/layouts/MainLayout.vue"),
-      meta: { title: name },
-    });
+function buildChildren(menus: Menu[], allMenus: Menu[]): any[] {
+  const routes: any[] = [];
+
+  for (const menu of menus) {
+    if (!menu.component) {
+      // component가 없으면 그 자식들을 가져옴
+      const grandChildren = allMenus.filter((m) => m.parentId === menu.id);
+      routes.push(...buildChildren(grandChildren, allMenus));
+    } else {
+      const children = allMenus.filter((m) => m.parentId === menu.id);
+      const route: any = {
+        path: menu.path,
+        name: `route-${menu.id}`,
+        component: componentMap[menu.component],
+        meta: { title: menu.name },
+      };
+
+      if (children.length > 0) {
+        route.children = buildChildren(children, allMenus);
+      }
+
+      routes.push(route);
+    }
   }
+
+  return routes;
 }
