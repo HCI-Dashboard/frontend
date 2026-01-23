@@ -93,13 +93,13 @@ onMounted(async () => {
             key: "cluster-external",
             uri: "/cluster/external",
           },
-        ]
+        ],
       },
       {
         label: () => h(RouterLink, { to: { name: "로그인" } }, () => "로그인"),
         key: "login",
         uri: "/login",
-      }
+      },
     ];
   } catch (error) {
     console.error("Failed to fetch menus:", error);

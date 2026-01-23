@@ -17,7 +17,8 @@ export default async function initRoutes() {
           router.addRoute({
             path,
             name,
-            component: () => menu.uri === "/login" ? import("@/layouts/LoginLayout.vue") : import("@/layouts/MainLayout.vue"),
+            component: () =>
+              menu.uri === "/login" ? import("@/layouts/LoginLayout.vue") : import("@/layouts/MainLayout.vue"),
             meta: { title: name },
           });
         }
