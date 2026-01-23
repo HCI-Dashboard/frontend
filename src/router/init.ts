@@ -1,13 +1,12 @@
 import router from "@/router";
 import type { Menu } from "@/types/menu";
+import type { RouteRecordRaw } from "vue-router";
 
-const componentMap: Record<string, () => Promise<any>> = {
-  MainLayout: () => import("@/layouts/MainLayout.vue"),
-  LoginLayout: () => import("@/layouts/LoginLayout.vue"),
-  MainPage: () => import("@/pages/MainPage.vue"),
-  LoginPage: () => import("@/pages/LoginPage.vue"),
-  ClusterPage: () => import("@/pages/ClusterPage.vue"),
-};
+// Vite의 glob import로 모든 컴포넌트를 동적으로 로드
+const modules = import.meta.glob([
+  "@/layouts/**/*.vue",
+  "@/pages/**/*.vue",
+]);
 
 export default async function initRoutes() {
   const response = await fetch("/api/v1/menus");
@@ -15,7 +14,6 @@ export default async function initRoutes() {
 
   // parentId가 null인 최상위 메뉴들을 찾아 라우트 생성
   const rootMenus = menus.filter((menu) => menu.parentId === null);
-
   for (const rootMenu of rootMenus) {
     buildRoute(rootMenu, menus);
   }
@@ -28,19 +26,29 @@ function buildRoute(menu: Menu, allMenus: Menu[]) {
     for (const child of children) {
       buildRoute(child, allMenus);
     }
+
     return;
   }
 
-  const children = allMenus.filter((m) => m.parentId === menu.id);
+  // component 경로를 Vite glob 키와 매칭
+  const componentPath = `/src/${menu.component}.vue`;
+  const componentLoader = modules[componentPath];
 
-  const route: any = {
+  if (!componentLoader) {
+    console.warn(`Component not found: ${componentPath}`);
+    return;
+  }
+
+  const route: RouteRecordRaw = {
     path: menu.path,
     name: `route-${menu.id}`,
-    component: componentMap[menu.component],
+    component: componentLoader,
+    children: [],
     meta: { title: menu.name },
   };
 
   // 자식 메뉴를 재귀적으로 처리
+  const children = allMenus.filter((m) => m.parentId === menu.id);
   if (children.length > 0) {
     route.children = buildChildren(children, allMenus);
   }
@@ -48,16 +56,26 @@ function buildRoute(menu: Menu, allMenus: Menu[]) {
   router.addRoute(route);
 }
 
-function buildChildren(menus: Menu[], allMenus: Menu[]): any[] {
-  const routes: any[] = [];
+function buildChildren(menus: Menu[], allMenus: Menu[]): RouteRecordRaw[] {
+  const routes: RouteRecordRaw[] = [];
 
   for (const menu of menus) {
     if (menu.component) {
       const children = allMenus.filter((m) => m.parentId === menu.id);
-      const route: any = {
+
+      const componentPath = `/src/${menu.component}.vue`;
+      const componentLoader = modules[componentPath];
+
+      if (!componentLoader) {
+        console.warn(`Component not found: ${componentPath}`);
+        continue;
+      }
+
+      const route: RouteRecordRaw = {
         path: menu.path,
         name: `route-${menu.id}`,
-        component: componentMap[menu.component],
+        component: componentLoader,
+        children: [],
         meta: { title: menu.name },
       };
 
