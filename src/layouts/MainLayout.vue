@@ -61,6 +61,7 @@ interface SubMenuItem {
 interface MenuItem {
   menuCd: string;
   menuNm: string;
+  uri: string;
   children: SubMenuItem[];
 }
 
@@ -74,47 +75,31 @@ onMounted(async () => {
     menuItems.value = data;
     menuOptions.value = [
       {
-        label: "Main Menu 1",
-        key: "main1",
-        children: [
-          {
-            label: () => h(RouterLink, { to: { name: "sub-nav 1", query: { lang: "ko-KR" } } }, () => "Sub Menu 1"),
-            key: "sub1-1",
-          },
-          {
-            label: () => h(RouterLink, { to: { name: "sub-nav 2", query: { lang: "ko-KR" } } }, () => "Sub Menu 2"),
-            key: "sub1-2",
-          },
-        ],
+        label: () => h(RouterLink, { to: { name: "대시보드" } }, () => "메인"),
+        key: "main",
+        uri: "/",
       },
       {
-        label: "Main Menu 2",
-        key: "main2",
+        label: "클러스터",
+        key: "cluster",
         children: [
           {
-            label: () => h(RouterLink, { to: { name: "sub-nav 3", query: { lang: "ko-KR" } } }, () => "Sub Menu 3"),
-            key: "sub2-1",
+            label: () => h(RouterLink, { to: { name: "내부망 클러스터" } }, () => "내부망"),
+            key: "cluster-internal",
+            uri: "/cluster/internal",
           },
           {
-            label: () => h(RouterLink, { to: { name: "sub-nav 4", query: { lang: "ko-KR" } } }, () => "Sub Menu 4"),
-            key: "sub2-2",
+            label: () => h(RouterLink, { to: { name: "외부망 클러스터" } }, () => "외부망"),
+            key: "cluster-external",
+            uri: "/cluster/external",
           },
-        ],
+        ]
       },
       {
-        label: "Main Menu 3",
-        key: "main3",
-        children: [
-          {
-            label: () => h(RouterLink, { to: { name: "sub-nav 5", query: { lang: "ko-KR" } } }, () => "Sub Menu 5"),
-            key: "sub3-1",
-          },
-          {
-            label: () => h(RouterLink, { to: { name: "sub-nav 6", query: { lang: "ko-KR" } } }, () => "Sub Menu 6"),
-            key: "sub3-2",
-          },
-        ],
-      },
+        label: () => h(RouterLink, { to: { name: "로그인" } }, () => "로그인"),
+        key: "login",
+        uri: "/login",
+      }
     ];
   } catch (error) {
     console.error("Failed to fetch menus:", error);

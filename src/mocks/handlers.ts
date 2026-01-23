@@ -4,29 +4,26 @@ export const handlers = [
   http.get("/api/v1/menus", () => {
     return HttpResponse.json([
       {
-        menuCd: "1",
-        menuNm: "nav 1",
-        children: [
-          { menuCd: "11", menuNm: "sub-nav 1", uri: "/subnav1", layout: "MainLayout" },
-          { menuCd: "12", menuNm: "sub-nav 2", uri: "/subnav2", layout: "MainLayout" },
-        ],
+        menuCd: "P01",
+        menuNm: "대시보드",
+        uri: "/",
+        layout: "MainLayout",
       },
       {
-        menuCd: "2",
-        menuNm: "nav 2",
+        menuCd: "P02",
+        menuNm: "클러스터",
+        layout: "MainLayout",
         children: [
-          { menuCd: "21", menuNm: "sub-nav 3", uri: "/subnav3", layout: "MainLayout" },
-          { menuCd: "22", menuNm: "sub-nav 4", uri: "/subnav4", layout: "MainLayout" },
-        ],
+          { menuCd: "P02-INT", menuNm: "내부망 클러스터", uri: "/cluster/internal", layout: "MainLayout" },
+          { menuCd: "P02-EXT", menuNm: "외부망 클러스터", uri: "/cluster/external", layout: "MainLayout" },
+        ]
       },
       {
-        menuCd: "3",
-        menuNm: "nav 3",
-        children: [
-          { menuCd: "31", menuNm: "sub-nav 5", uri: "/subnav5", layout: "MainLayout" },
-          { menuCd: "32", menuNm: "sub-nav 6", uri: "/subnav6", layout: "MainLayout" },
-        ],
-      },
+        menuCd: "P06",
+        menuNm: "로그인",
+        uri: "/login",
+        layout: "LoginLayout",
+      }
     ]);
   }),
 ];
