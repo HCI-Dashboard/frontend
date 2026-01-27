@@ -3,10 +3,7 @@ import type { Menu } from "@/types/menu";
 import type { RouteRecordRaw } from "vue-router";
 import { RouterView } from "vue-router"; // 내장된 RouterView 사용
 
-const modules = import.meta.glob([
-  "@/layouts/**/*.vue",
-  "@/pages/**/*.vue",
-]);
+const modules = import.meta.glob(["@/layouts/**/*.vue", "@/pages/**/*.vue"]);
 
 export default async function initRoutes() {
   try {
@@ -54,7 +51,7 @@ function buildRouteRecord(menu: Menu, allMenus: Menu[]): RouteRecordRaw | null {
     meta: {
       title: menu.name,
       // 클릭 불가능한 메뉴인지 여부를 meta에 저장해두면 UI(사이드바) 그릴 때 편합니다.
-      isLayoutOnly: !menu.component
+      isLayoutOnly: !menu.component,
     },
   };
 

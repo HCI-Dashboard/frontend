@@ -78,7 +78,7 @@ onMounted(async () => {
     const data = await ky.get("/api/v1/menus").json<MenuItem[]>();
 
     // 2. 평면 리스트를 트리 구조로 변환
-    const mainLayout = data.find(m => m.id === 1);
+    const mainLayout = data.find((m) => m.id === 1);
     if (mainLayout) {
       menuOptions.value = buildMenuTree(data, mainLayout.id);
     }
@@ -95,9 +95,10 @@ function buildMenuTree(allMenus: MenuItem[], parentId: number | null): any[] {
 
       // 또는 사용자님의 요구대로 "실제 페이지" 컴포넌트인 경우만 링크 처리
       // 여기서는 'pages/'가 포함되었거나 component가 비어있지 않은 경우로 체크 가능
-      const label = (item.component !== "" && !item.component.includes("layouts"))
-        ? () => h(RouterLink, { to: { path: item.path } }, () => item.name)
-        : item.name;
+      const label =
+        item.component !== "" && !item.component.includes("layouts")
+          ? () => h(RouterLink, { to: { path: item.path } }, () => item.name)
+          : item.name;
 
       const menuNode: any = {
         label,
