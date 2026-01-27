@@ -59,48 +59,59 @@ interface SubMenuItem {
 }
 
 interface MenuItem {
+  id: number;
+  name: string;
   menuCd: string;
   menuNm: string;
-  uri: string;
+  parentId: number | null;
+  component: string;
+  path: string;
   children: SubMenuItem[];
 }
 
-const menuItems = ref<MenuItem[]>([]);
 const collapsed = ref<boolean>(false);
 const menuOptions = ref<MenuOption[]>([]);
 
 onMounted(async () => {
   try {
+    // 1. API로부터 데이터 로드
     const data = await ky.get("/api/v1/menus").json<MenuItem[]>();
-    menuItems.value = data;
-    menuOptions.value = [
-      {
-        label: () => h(RouterLink, { to: { path: "/" } }, () => "메인"),
-        key: "main",
-      },
-      {
-        label: "클러스터",
-        key: "cluster",
-        children: [
-          {
-            label: () => h(RouterLink, { to: { path: "/cluster/internal" } }, () => "내부망"),
-            key: "cluster-internal",
-          },
-          {
-            label: () => h(RouterLink, { to: { path: "/cluster/external" } }, () => "외부망"),
-            key: "cluster-external",
-          },
-        ],
-      },
-      {
-        label: () => h(RouterLink, { to: { path: "/login" } }, () => "로그인"),
-        key: "login",
-      },
-    ];
+
+    // 2. 평면 리스트를 트리 구조로 변환
+    const mainLayout = data.find(m => m.id === 1);
+    if (mainLayout) {
+      menuOptions.value = buildMenuTree(data, mainLayout.id);
+    }
   } catch (error) {
     console.error("Failed to fetch menus:", error);
   }
 });
+
+function buildMenuTree(allMenus: MenuItem[], parentId: number | null): any[] {
+  return allMenus
+    .filter((item) => item.parentId === parentId)
+    .map((item) => {
+      const children = buildMenuTree(allMenus, item.id);
+
+      // 또는 사용자님의 요구대로 "실제 페이지" 컴포넌트인 경우만 링크 처리
+      // 여기서는 'pages/'가 포함되었거나 component가 비어있지 않은 경우로 체크 가능
+      const label = (item.component !== "" && !item.component.includes("layouts"))
+        ? () => h(RouterLink, { to: { path: item.path } }, () => item.name)
+        : item.name;
+
+      const menuNode: any = {
+        label,
+        key: `menu-${item.id}`, // 고유 키
+      };
+
+      // 자식이 있으면 children 속성 추가
+      if (children.length > 0) {
+        menuNode.children = children;
+      }
+
+      return menuNode;
+    });
+}
 </script>
 
 <style>
