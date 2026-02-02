@@ -41,7 +41,7 @@ onMounted(async () => {
   const elseCount = await prometheusService.getElseVmCount();
 
   vmData.value = [activeCount, shutoffCount, elseCount];
-})
+});
 </script>
 
 <style scoped>

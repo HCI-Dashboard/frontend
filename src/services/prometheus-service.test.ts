@@ -12,4 +12,4 @@ describe("PrometheusService class test", () => {
     console.log(response);
     expect(response).toBeDefined();
   });
-})
+});
