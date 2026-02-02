@@ -93,8 +93,6 @@ function buildMenuTree(allMenus: MenuItem[], parentId: number | null): any[] {
     .map((item) => {
       const children = buildMenuTree(allMenus, item.id);
 
-      // 또는 사용자님의 요구대로 "실제 페이지" 컴포넌트인 경우만 링크 처리
-      // 여기서는 'pages/'가 포함되었거나 component가 비어있지 않은 경우로 체크 가능
       const label =
         item.component !== "" && !item.component.includes("layouts")
           ? () => h(RouterLink, { to: { path: item.path } }, () => item.name)
