@@ -12,6 +12,9 @@
         @collapse="collapsed = true"
         @expand="collapsed = false"
       >
+        <div>
+          <div class="logo" style="height: 64px; margin-top: 0px; margin-bottom: 0px; text-align: center;"> 대시보드 </div>
+        </div>
         <n-menu :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22" :options="menuOptions" />
       </n-layout-sider>
       <n-layout style="height: 100vh; display: flex; flex-direction: column">
