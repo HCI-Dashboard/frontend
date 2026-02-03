@@ -5,10 +5,20 @@
     </n-row>
     <n-row gutter="12">
       <n-col :span="12">
-        <DoughnutChartComponent title="호스트 상태" :data="hostData" :labels="hostLabels" :backgroundColor="hostBackgroundColor" />
+        <DoughnutChartComponent
+          title="호스트 상태"
+          :data="hostData"
+          :labels="hostLabels"
+          :backgroundColor="hostBackgroundColor"
+        />
       </n-col>
       <n-col :span="12">
-        <DoughnutChartComponent title="가상머신 상태" :data="vmData" :labels="vmLabels" :backgroundColor="vmBackgroundColor" />
+        <DoughnutChartComponent
+          title="가상머신 상태"
+          :data="vmData"
+          :labels="vmLabels"
+          :backgroundColor="vmBackgroundColor"
+        />
       </n-col>
     </n-row>
   </n-card>
