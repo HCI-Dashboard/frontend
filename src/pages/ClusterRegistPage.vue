@@ -21,9 +21,7 @@
         <n-space vertical>
           <n-input placeholder="계정" :v-model="id" />
           <n-input placeholder="비밀번호" type="password" :v-model="password" />
-          <n-button id="test-button" type="info">
-            연결 테스트
-          </n-button>
+          <n-button id="test-button" type="primary"> 연결 테스트 </n-button>
           <n-input placeholder="설명" type="textarea" :v-model="description" />
         </n-space>
       </n-col>
@@ -37,18 +35,21 @@
       </n-col>
       <n-col span="12">
         <n-row align="middle">
-          <n-col span="4" class="text-center">
-            수집간격
-          </n-col>
+          <n-col span="4" class="text-center"> 수집간격 </n-col>
           <n-col span="18">
             <n-input-number placeholder="수집간격" :v-model="collectionInterval" />
           </n-col>
-          <n-col span="2" class="text-center">
-            분
-          </n-col>
+          <n-col span="2" class="text-center"> 분 </n-col>
         </n-row>
       </n-col>
     </n-row>
+    <n-divider />
+    <div style="display: flex; justify-content: flex-end">
+      <n-space>
+        <n-button>취소</n-button>
+        <n-button type="info">등록</n-button>
+      </n-space>
+    </div>
   </n-card>
 </template>
 

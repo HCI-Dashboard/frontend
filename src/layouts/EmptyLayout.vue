@@ -1,7 +1,4 @@
 <template>
-  <cluster-regist-page />
-  <!-- <router-view /> -->
+  <router-view />
 </template>
-<script setup lang="ts">
-import ClusterRegistPage from "@/pages/ClusterRegistPage.vue";
-</script>
+<script setup lang="ts"></script>
