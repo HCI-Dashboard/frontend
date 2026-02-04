@@ -53,10 +53,18 @@ const createChart = () => {
       plugins: {
         legend: {
           position: "bottom",
+          labels: {
+            font: {
+              size: 14,
+            },
+          },
         },
         title: {
           display: true,
           text: props.title,
+          font: {
+            size: 18,
+          },
         },
       },
     },

@@ -21,6 +21,37 @@
         />
       </n-col>
     </n-row>
+    <n-row>
+      <h2>이벤트</h2>
+    </n-row>
+    <n-row>
+      <n-table>
+        <thead>
+          <tr>
+            <th id="event-time">시간</th>
+            <th id="event-host">호스트</th>
+            <th id="event-content">내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024-06-01 12:00:00</td>
+            <td>host1</td>
+            <td>호스트가 정상적으로 작동합니다.</td>
+          </tr>
+          <tr>
+            <td>2024-06-01 12:00:00</td>
+            <td>host1</td>
+            <td>vm-1이 비정상적으로 종료되었습니다.</td>
+          </tr>
+          <tr>
+            <td>2024-06-01 12:00:00</td>
+            <td>host1</td>
+            <td>vm-1이 새로 추가되었습니다.</td>
+          </tr>
+        </tbody>
+      </n-table>
+    </n-row>
   </n-card>
 </template>
 <script setup lang="ts">
