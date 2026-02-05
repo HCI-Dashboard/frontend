@@ -2,40 +2,42 @@
   <n-row>
     <h2>{{ props.title }}</h2>
   </n-row>
-  <n-row gutter="12">
-    <n-col :span="12">
-      <DoughnutChartComponent
-        title="호스트 상태"
-        :data="hostData"
-        :labels="hostLabels"
-        :backgroundColor="hostBackgroundColor"
-      />
-    </n-col>
-    <n-col :span="12">
-      <DoughnutChartComponent
-        title="가상머신 상태"
-        :data="vmData"
-        :labels="vmLabels"
-        :backgroundColor="vmBackgroundColor"
-      />
+  <n-row>
+    <n-col :span="24">
+      <n-space vertical>
+        <n-row gutter="36">
+          <n-col :span="12">
+            <DoughnutChartComponent
+              title="호스트 상태"
+              :data="hostData"
+              :labels="hostLabels"
+              :backgroundColor="hostBackgroundColor"
+            />
+          </n-col>
+          <n-col :span="12">
+            <DoughnutChartComponent
+              title="가상머신 상태"
+              :data="vmData"
+              :labels="vmLabels"
+              :backgroundColor="vmBackgroundColor"
+            />
+          </n-col>
+        </n-row>
+        <n-row gutter="24">
+          <n-col :span="8">
+            <GaugeChartComponent title="CPU" :value="108" :maxValue="1152" />
+          </n-col>
+          <n-col :span="8">
+            <GaugeChartComponent title="Memory" :value="32800" :maxValue="115000" />
+          </n-col>
+          <n-col :span="8">
+            <GaugeChartComponent title="Storage" :value="32800" :maxValue="1115000" />
+          </n-col>
+        </n-row>
+      </n-space>
     </n-col>
   </n-row>
-  <n-row gutter="12">
-    <n-col :span="12">
-      <GaugeChartComponent
-        title="CPU"
-        :value="108"
-        :maxValue="1152"
-      />
-    </n-col>
-    <n-col :span="12">
-      <GaugeChartComponent
-        title="Memory"
-        :value="32800"
-        :maxValue="115000"
-      />
-    </n-col>
-  </n-row>
+
   <n-row>
     <h2>최근 이벤트</h2>
   </n-row>
