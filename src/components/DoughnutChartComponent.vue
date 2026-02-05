@@ -1,6 +1,6 @@
 <template>
   <n-card>
-    <div style="text-align: center; max-width: 280px; margin: auto">
+    <div style="text-align: center; max-width: 260px; margin: auto">
       <canvas ref="chartCanvas"></canvas>
     </div>
   </n-card>

@@ -20,6 +20,22 @@
       />
     </n-col>
   </n-row>
+  <n-row gutter="12">
+    <n-col :span="12">
+      <GaugeChartComponent
+        title="CPU"
+        :value="108"
+        :maxValue="1152"
+      />
+    </n-col>
+    <n-col :span="12">
+      <GaugeChartComponent
+        title="Memory"
+        :value="32800"
+        :maxValue="115000"
+      />
+    </n-col>
+  </n-row>
   <n-row>
     <h2>최근 이벤트</h2>
   </n-row>
@@ -66,6 +82,7 @@
 import { onMounted, ref } from "vue";
 import DoughnutChartComponent from "@/components/DoughnutChartComponent.vue";
 import { PrometheusService } from "@/services/prometheus-service";
+import GaugeChartComponent from "./GaugeChartComponent.vue";
 
 const props = defineProps<{
   title: string;
