@@ -59,10 +59,9 @@ onMounted(async () => {
         {
           label: () => h(RouterLink, { to: "/manage/system" }, { default: () => "시스템 관리" }),
           key: "manage-system",
-        }
+        },
       ],
-    }
-  ]
+    },
+  ];
 });
-
 </script>
