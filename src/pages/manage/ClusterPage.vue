@@ -96,7 +96,12 @@
     <n-row gutter="24">
       <n-col span="12">
         <n-space vertical>
-          <n-select v-model:value="collectionAdapterValue" :options="collectionAdapterOptions" />
+          <n-row gutter="12">
+            <n-col span="4" class="text-right">수집어댑터</n-col>
+            <n-col span="20">
+              <n-select v-model:value="collectionAdapterValue" :options="collectionAdapterOptions" />
+            </n-col>
+          </n-row>
         </n-space>
       </n-col>
       <n-col span="12">
