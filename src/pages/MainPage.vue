@@ -1,6 +1,4 @@
 <template>
-  <div>
-    Main Page
-  </div>
+  <div>Main Page</div>
 </template>
 <script setup lang="ts"></script>

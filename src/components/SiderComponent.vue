@@ -1,0 +1,85 @@
+<template>
+  <n-layout-sider
+    bordered
+    show-trigger
+    collapse-mode="width"
+    :collapsed-width="64"
+    :width="240"
+    :collapsed="collapsed"
+    @collapse="collapsed = true"
+    @expand="collapsed = false"
+  >
+    <!-- 로고 -->
+    <div style="height: 64px; display: flex; align-items: center; justify-content: center; margin: 0">
+      <img src="/img/popcorn.jpg" alt="Logo" style="max-height: 48px; max-width: 80%; object-fit: contain" />
+    </div>
+    <n-menu :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22" :options="menuOptions" />
+  </n-layout-sider>
+</template>
+<script setup lang="ts">
+import ky from "ky";
+
+import { ref, onMounted, h } from "vue";
+import { RouterLink } from "vue-router";
+import type { MenuOption } from "naive-ui";
+
+interface SubMenuItem {
+  menuCd: string;
+  menuNm: string;
+  uri: string;
+}
+
+interface MenuItem {
+  id: number;
+  name: string;
+  menuCd: string;
+  menuNm: string;
+  parentId: number | null;
+  component: string;
+  path: string;
+  children: SubMenuItem[];
+}
+
+const collapsed = ref<boolean>(false);
+const menuOptions = ref<MenuOption[]>([]);
+
+onMounted(async () => {
+  try {
+    // 1. API로부터 데이터 로드
+    const data = await ky.get("/api/v1/menus").json<MenuItem[]>();
+
+    // 2. 평면 리스트를 트리 구조로 변환
+    const mainLayout = data.find((m) => m.id === 1);
+    if (mainLayout) {
+      menuOptions.value = buildMenuTree(data, mainLayout.id);
+    }
+  } catch (error) {
+    console.error("Failed to fetch menus:", error);
+  }
+});
+
+function buildMenuTree(allMenus: MenuItem[], parentId: number | null): any[] {
+  return allMenus
+    .filter((item) => item.parentId === parentId)
+    .map((item) => {
+      const children = buildMenuTree(allMenus, item.id);
+
+      const label =
+        item.component !== "" && !item.component.includes("layouts")
+          ? () => h(RouterLink, { to: { path: item.path } }, () => item.name)
+          : item.name;
+
+      const menuNode: any = {
+        label,
+        key: `menu-${item.id}`, // 고유 키
+      };
+
+      // 자식이 있으면 children 속성 추가
+      if (children.length > 0) {
+        menuNode.children = children;
+      }
+
+      return menuNode;
+    });
+}
+</script>

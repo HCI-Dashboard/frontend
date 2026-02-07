@@ -1,7 +1,4 @@
 <template>
-  <div>
-    User Manage Page
-  </div>
+  <div>User Manage Page</div>
 </template>
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>

@@ -1,7 +1,4 @@
 <template>
-  <div>
-    Cluster Manage Page
-  </div>
+  <div>Cluster Manage Page</div>
 </template>
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>

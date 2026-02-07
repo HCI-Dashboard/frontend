@@ -20,8 +20,8 @@ const router = createRouter({
               path: ":clusterId",
               name: "클러스터",
               component: () => import("@/pages/clusters/ClusterPage.vue"),
-            }
-          ]
+            },
+          ],
         },
         {
           path: "manage",
@@ -41,10 +41,10 @@ const router = createRouter({
               path: "system",
               name: "시스템 관리",
               component: () => import("@/pages/manage/SystemPage.vue"),
-            }
-          ]
-        }
-      ]
+            },
+          ],
+        },
+      ],
     },
     {
       path: "/login",
@@ -54,9 +54,9 @@ const router = createRouter({
           path: "",
           name: "로그인",
           component: () => import("@/pages/login/LoginPage.vue"),
-        }
-      ]
-    }
+        },
+      ],
+    },
   ],
 });
 
