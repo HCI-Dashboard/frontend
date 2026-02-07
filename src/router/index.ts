@@ -30,7 +30,18 @@ const router = createRouter({
             {
               path: "clusters",
               name: "클러스터 관리",
-              component: () => import("@/pages/manage/ClusterPage.vue"),
+              children: [
+                {
+                  path: "",
+                  name: "클러스터 목록",
+                  component: () => import("@/pages/manage/clusters/ClusterPage.vue"),
+                },
+                {
+                  path: "regist",
+                  name: "클러스터 등록",
+                  component: () => import("@/pages/manage/clusters/RegistPage.vue"),
+                },
+              ],
             },
             {
               path: "users",
