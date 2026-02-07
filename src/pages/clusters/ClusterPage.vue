@@ -18,6 +18,6 @@ watch(
   (newClusterId) => {
     clusterId.value = newClusterId as string;
     console.log("Cluster ID changed:", clusterId);
-  }
+  },
 );
 </script>

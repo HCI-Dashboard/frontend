@@ -28,12 +28,12 @@ const router = createRouter({
           component: () => import("@/layouts/EmptyLayout.vue"),
           children: [
             {
-              path: "cluster",
+              path: "clusters",
               name: "클러스터 관리",
               component: () => import("@/pages/manage/ClusterPage.vue"),
             },
             {
-              path: "user",
+              path: "users",
               name: "사용자 관리",
               component: () => import("@/pages/manage/UserPage.vue"),
             },
