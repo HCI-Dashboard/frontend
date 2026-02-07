@@ -12,8 +12,9 @@
         @collapse="collapsed = true"
         @expand="collapsed = false"
       >
-        <div>
-          <div class="logo" style="height: 64px; margin-top: 0px; margin-bottom: 0px; text-align: center">대시보드</div>
+        <!-- 로고 -->
+        <div style="height: 64px; display: flex; align-items: center; justify-content: center; margin: 0">
+          <img src="/img/popcorn.jpg" alt="Logo" style="max-height: 48px; max-width: 80%; object-fit: contain" />
         </div>
         <n-menu :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22" :options="menuOptions" />
       </n-layout-sider>
